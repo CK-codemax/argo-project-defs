@@ -4,7 +4,7 @@ This repository contains Kubernetes manifests for deploying the **vprofile** mul
 
 ## 🎯 Project Overview
 
-This project demonstrates GitOps best practices for automated Kubernetes deployments. The application runs on infrastructure provisioned by the [3-nodes-vagrant-kubernetes-cluster](https://github.com/CK-codemax/3-nodes-vagrant-kubernetes-cluster.git) project.
+This project demonstrates GitOps best practices for automated Kubernetes deployments. The application runs on infrastructure provisioned by the [3-Node Production Grade Kubernetes Cluster with Vagrant & Ansible](https://github.com/CK-codemax/3-Node-Production-Grade-Kubernetes-Cluster-with-Vagrant-Ansible.git) project.
 
 **GitOps Benefits:**
 - Version-controlled infrastructure
@@ -37,7 +37,7 @@ This project demonstrates GitOps best practices for automated Kubernetes deploym
 
 ## 📋 Prerequisites
 
-- Kubernetes cluster (v1.19+) - [Setup guide](https://github.com/CK-codemax/3-nodes-vagrant-kubernetes-cluster.git)
+- Kubernetes cluster (v1.19+) - [Setup guide](https://github.com/CK-codemax/3-Node-Production-Grade-Kubernetes-Cluster-with-Vagrant-Ansible.git)
 - ArgoCD installed
 - NGINX Ingress Controller
 - Metrics Server (for HPA)
@@ -167,7 +167,7 @@ Ensure NGINX Ingress Controller is installed and DNS points to your cluster.
 ## 🏗️ Infrastructure Setup
 
 This GitOps project deploys on Kubernetes infrastructure from:
-**[3-nodes-vagrant-kubernetes-cluster](https://github.com/CK-codemax/3-nodes-vagrant-kubernetes-cluster.git)**
+**[3-Node Production Grade Kubernetes Cluster with Vagrant & Ansible](https://github.com/CK-codemax/3-Node-Production-Grade-Kubernetes-Cluster-with-Vagrant-Ansible.git)**
 
 The infrastructure project provides:
 - 3-node Kubernetes cluster (1 master, 2 workers)
@@ -177,9 +177,9 @@ The infrastructure project provides:
 
 ## 📚 Resources
 
-- [Infrastructure Setup Guide](https://github.com/CK-codemax/3-nodes-vagrant-kubernetes-cluster.git)
+- [Infrastructure Setup Guide](https://github.com/CK-codemax/3-Node-Production-Grade-Kubernetes-Cluster-with-Vagrant-Ansible.git)
 
 ## 👥 Credits
 
-- **Infrastructure**: [3-nodes-vagrant-kubernetes-cluster](https://github.com/CK-codemax/3-nodes-vagrant-kubernetes-cluster.git)
+- **Infrastructure**: [3-Node Production Grade Kubernetes Cluster with Vagrant & Ansible](https://github.com/CK-codemax/3-Node-Production-Grade-Kubernetes-Cluster-with-Vagrant-Ansible.git)
 - **GitOps**: ArgoCD-based automated deployment
