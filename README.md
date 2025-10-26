@@ -177,12 +177,9 @@ The infrastructure project provides:
 
 ## 📚 Resources
 
-- [ArgoCD Documentation](https://argo-cd.readthedocs.io/)
-- [GitOps Principles](https://www.gitops.tech/)
 - [Infrastructure Setup Guide](https://github.com/CK-codemax/3-nodes-vagrant-kubernetes-cluster.git)
 
 ## 👥 Credits
 
-- **Application**: VProfile Java app by ochukowh
 - **Infrastructure**: [3-nodes-vagrant-kubernetes-cluster](https://github.com/CK-codemax/3-nodes-vagrant-kubernetes-cluster.git)
 - **GitOps**: ArgoCD-based automated deployment
