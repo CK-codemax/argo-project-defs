@@ -1,5 +1,8 @@
 # VProfile Application - GitOps Kubernetes Definitions
 
+![Kubernetes](https://img.shields.io/badge/kubernetes-v1.28-326CE5?style=flat&logo=kubernetes&logoColor=white)
+![ArgoCD](https://img.shields.io/badge/argocd-gitops-EF7B4D?style=flat&logo=argo&logoColor=white)
+
 This repository contains Kubernetes manifests for deploying the **vprofile** multi-tier Java application using **GitOps** with ArgoCD.
 
 ## 🎯 Project Overview
