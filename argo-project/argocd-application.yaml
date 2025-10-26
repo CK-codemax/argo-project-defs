@@ -3,84 +3,19 @@ kind: Application
 metadata:
   name: vprofile-app
   namespace: argocd
-  # Add labels for better organization
-  labels:
-    app: vprofile
-    environment: production
-  # Finalizer to ensure proper cleanup
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
-  # Annotations for notifications (optional)
-  annotations:
-    notifications.argoproj.io/subscribe.on-deployed.slack: vprofile-notifications
-    notifications.argoproj.io/subscribe.on-health-degraded.slack: vprofile-alerts
 spec:
-  # Project reference
-  project: vprofile-project
-  
-  # Source repository configuration
-  source:
-    # IMPORTANT: Replace with your actual Git repository URL
-    repoURL: https://github.com/YOUR-USERNAME/argo-project-defs.git
-    targetRevision: main  # or master, or specific branch/tag
-    path: .  # Path within the repo where manifests are located
-    
-    # Optional: Directory recursion
-    directory:
-      recurse: false
-      # Include/exclude patterns (optional)
-      # include: '*.yaml'
-      # exclude: 'test/*'
-  
-  # Destination cluster and namespace
   destination:
-    server: https://kubernetes.default.svc  # In-cluster deployment
     namespace: vprofile
-  
-  # Sync policy configuration
+    server: https://kubernetes.default.svc
+  project: vprofile-project
+  source:
+    path: vprofile
+    repoURL: https://github.com/CK-codemax/argo-project-defs.git
+    targetRevision: main
   syncPolicy:
-    # Automated sync configuration
     automated:
-      prune: true      # Delete resources that are no longer defined in Git
-      selfHeal: true   # Auto-sync when cluster state deviates from Git
-      allowEmpty: false # Prevent deletion of all resources
-    
-    # Sync options
+      prune: true
+      selfHeal: true
     syncOptions:
-      - CreateNamespace=true     # Auto-create namespace if it doesn't exist
-      - PrunePropagationPolicy=foreground  # Wait for resources to be deleted
-      - PruneLast=true           # Prune resources as last step
-      - ApplyOutOfSyncOnly=true  # Only sync resources that are out of sync
-      - RespectIgnoreDifferences=true
-    
-    # Retry configuration for failed syncs
-    retry:
-      limit: 5
-      backoff:
-        duration: 5s
-        factor: 2
-        maxDuration: 3m
-  
-  # Ignore differences in certain fields (prevents unnecessary syncs)
-  ignoreDifferences:
-    - group: apps
-      kind: Deployment
-      jsonPointers:
-        - /spec/replicas  # Ignore replica count changes (HPA manages this)
-    - group: autoscaling
-      kind: HorizontalPodAutoscaler
-      jsonPointers:
-        - /status  # Ignore HPA status changes
-  
-  # Health assessment configuration
-  revisionHistoryLimit: 10
-  
-  # Info for UI display
-  info:
-    - name: 'Application URL'
-      value: 'https://vprofile.ochukowhoro.xyz'
-    - name: 'Documentation'
-      value: 'https://github.com/YOUR-USERNAME/argo-project-defs/blob/main/README.md'
-    - name: 'Team'
-      value: 'Platform Engineering'
+      - CreateNamespace=true
 

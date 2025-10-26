@@ -3,7 +3,6 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: vproapp-hpa
-  namespace: vprofile
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -45,34 +44,7 @@ spec:
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: vprodb-hpa
-  namespace: vprofile
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: vprodb
-  minReplicas: 1
-  maxReplicas: 3
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 70
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
----
-apiVersion: autoscaling/v2
-kind: HorizontalPodAutoscaler
-metadata:
   name: vpromc-hpa
-  namespace: vprofile
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -98,7 +70,6 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: vpromq01-hpa
-  namespace: vprofile
 spec:
   scaleTargetRef:
     apiVersion: apps/v1

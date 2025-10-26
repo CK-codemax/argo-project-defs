@@ -3,114 +3,13 @@ kind: AppProject
 metadata:
   name: vprofile-project
   namespace: argocd
-  # Finalizer that ensures that project is not deleted until it is not referenced by any application
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
 spec:
-  description: VProfile Application Project - Multi-tier Java application with MySQL, Memcached, and RabbitMQ
-  
-  # Allow manifests to deploy from any Git repos
+  description: VProfile Application Project
   sourceRepos:
     - '*'
-  
-  # Allow applications to be deployed to these destinations
   destinations:
-    - namespace: vprofile
-      server: https://kubernetes.default.svc
-    - namespace: vprofile-staging
-      server: https://kubernetes.default.svc
-    - namespace: vprofile-prod
-      server: https://kubernetes.default.svc
-  
-  # Cluster-level resources that are allowed to be deployed
+    - namespace: '*'
+      server: '*'
   clusterResourceWhitelist:
-    - group: ''
-      kind: Namespace
-    - group: ''
-      kind: PersistentVolume
-    - group: 'storage.k8s.io'
-      kind: StorageClass
-    - group: 'rbac.authorization.k8s.io'
-      kind: ClusterRole
-    - group: 'rbac.authorization.k8s.io'
-      kind: ClusterRoleBinding
-  
-  # Namespace-level resources that are allowed to be deployed
-  namespaceResourceWhitelist:
-    - group: 'apps'
-      kind: Deployment
-    - group: 'apps'
-      kind: StatefulSet
-    - group: ''
-      kind: Service
-    - group: ''
-      kind: ConfigMap
-    - group: ''
-      kind: Secret
-    - group: ''
-      kind: PersistentVolumeClaim
-    - group: 'networking.k8s.io'
-      kind: Ingress
-    - group: 'autoscaling'
-      kind: HorizontalPodAutoscaler
-    - group: ''
-      kind: ResourceQuota
-    - group: ''
-      kind: LimitRange
-    - group: 'rbac.authorization.k8s.io'
-      kind: Role
-    - group: 'rbac.authorization.k8s.io'
-      kind: RoleBinding
-    - group: ''
-      kind: ServiceAccount
-  
-  # Deny all namespace-scoped resources from being deleted (safety measure)
-  namespaceResourceBlacklist: []
-  
-  # Roles for project-specific RBAC
-  roles:
-    # Admin role - full access to applications in this project
-    - name: project-admin
-      description: Full access to vprofile project applications
-      policies:
-        - p, proj:vprofile-project:project-admin, applications, *, vprofile-project/*, allow
-      groups:
-        - vprofile-admins
-    
-    # Developer role - can sync and view applications
-    - name: developer
-      description: Developer access - can sync and view applications
-      policies:
-        - p, proj:vprofile-project:developer, applications, get, vprofile-project/*, allow
-        - p, proj:vprofile-project:developer, applications, sync, vprofile-project/*, allow
-      groups:
-        - vprofile-developers
-    
-    # Read-only role
-    - name: readonly
-      description: Read-only access to vprofile project
-      policies:
-        - p, proj:vprofile-project:readonly, applications, get, vprofile-project/*, allow
-      groups:
-        - vprofile-viewers
-  
-  # Sync windows for controlling when syncs can happen
-  syncWindows:
-    - kind: allow
-      schedule: '* * * * *'
-      duration: 24h
-      applications:
-        - '*'
-      manualSync: true
-    # Example: Deny automated syncs during business hours (uncomment if needed)
-    # - kind: deny
-    #   schedule: '0 9-17 * * 1-5'  # 9 AM to 5 PM, Monday to Friday
-    #   duration: 8h
-    #   applications:
-    #     - '*'
-    #   manualSync: true
-  
-  # Orphaned resources monitoring
-  orphanedResources:
-    warn: true
-
+    - group: '*'
+      kind: '*'
