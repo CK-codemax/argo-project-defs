@@ -6,8 +6,9 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    cert-manager.io/cluster-issuer: http-01-production
 spec:
-  ingressClassName: nginx
+  ingressClassName: external-nginx
   rules:
   - host: vprofile.ochukowhoro.xyz
     http:
@@ -19,3 +20,7 @@ spec:
             name: vproapp-service
             port:
               number: 8080
+  tls:
+  - hosts:
+    - vprofile.ochukowhoro.xyz
+    secretName: vprofile-ochukowhoro-xyz

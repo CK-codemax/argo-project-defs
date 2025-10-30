@@ -11,7 +11,7 @@ spec:
   source:
     path: vprofile
     repoURL: https://github.com/CK-codemax/argo-project-defs.git
-    targetRevision: main
+    targetRevision: amazon-eks
   syncPolicy:
     automated:
       prune: true
