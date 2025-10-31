@@ -5,6 +5,15 @@ metadata:
   namespace: vprofile
   annotations:
     cert-manager.io/cluster-issuer: http-01-production
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      # Allow HTTP for ACME challenge
+      location ^~ /.well-known/acme-challenge/ {
+        allow all;
+        root /usr/share/nginx/html;
+        try_files $uri =404;
+      }
 spec:
   ingressClassName: external-nginx
   rules:
