@@ -35,18 +35,18 @@ spec:
         command: ['sh', '-c', 'until nslookup vprodb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
         resources:
           requests:
+            memory: "32Mi"
+            cpu: "10m"
+          limits:
             memory: "64Mi"
             cpu: "50m"
-          limits:
-            memory: "128Mi"
-            cpu: "100m"
       - name: init-memcache
         image: busybox
         command: ['sh', '-c', 'until nslookup vprocache01.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done;']
         resources:
           requests:
+            memory: "32Mi"
+            cpu: "10m"
+          limits:
             memory: "64Mi"
             cpu: "50m"
-          limits:
-            memory: "128Mi"
-            cpu: "100m"
